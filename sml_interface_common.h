@@ -5,13 +5,19 @@
 
 #define  SML_NAME_OF(x)																# x
 
-#define  SML_OBJ_FUNC(obj, func)													SML_ ## obj ## _ ## func
-//#define  SML_OBJ_FUNC_RPIVATE(obj, func)											SML_Private_ ## obj ## _ ## func
+#define  SML_OBJ_FUNC(obj, func)													SmartLib_ ## obj ## _ ## func
+#define  SML_OBJ_FUNC_2(obj, type2, func)											SmartLib_ ## obj ## _ ## type2 ## _ ## func
+#define  SML_OBJ_FUNC_3(obj, type2, type3, func)									SmartLib_ ## obj ## _ ## type2 ## _ ## type3 ## _ ## func
+#define  SML_OBJ_FUNC_4(obj, type2, type3, type4, func)								SmartLib_ ## obj ## _ ## type2 ## _ ## type3 ## _ ## type4 ## func
+#define  SML_OBJ_FUNC_5(obj, type2, type3, type4, type5, func)						SmartLib_ ## obj ## _ ## type2 ## _ ## type3 ## _ ## type4 ## _ ## type5 ## func
+#define  SML_OBJ_FUNC_6(obj, type2, type3, type4, type5, type6, func)				SmartLib_ ## obj ## _ ## type2 ## _ ## type3 ## _ ## type4 ## _ ## type5 ## _ ## type6 ## func
+//add more if needed
 
-#define  SML_FUNC_TABLE(type_name, interface_name)									SML_ ## type_name ## _ ## interface_name ## _ ## Table
+
+#define  SML_FUNC_TABLE(type_name, interface_name)									SmartLib_ ## type_name ## _ ## interface_name ## _ ## Table
 #define  SML_FUNC_TABLE_DEFINE(type_name, interface_name)							const struct interface_name SML_FUNC_TABLE(type_name, interface_name)
 
-#define  SML_INTERFACE(interface_type)												m_sml_interface_ ## interface_type
+#define  SML_INTERFACE(interface_type)												m_smart_lib_interface_ ## interface_type
 #define  SML_INTERFACE_DEFINE(interface_type)										struct interface_type SML_INTERFACE(interface_type)
 
 #define SML_CALL_METHOD(method, interface_ptr, ...)									(interface_ptr) -> method ((interface_ptr), __VA_ARGS__)
