@@ -22,12 +22,12 @@
 
 #define SML_CALL_METHOD(method, interface_ptr, ...)									(interface_ptr) -> method ((interface_ptr), __VA_ARGS__)
 
-#define SML_GET_OBJECT_1(type0, type1, ptr)											(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1))))
-#define SML_GET_OBJECT_2(type0, type1, type2, ptr)									(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2))))
-#define SML_GET_OBJECT_3(type0, type1, type2, type3, ptr)							(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3))))
-#define SML_GET_OBJECT_4(type0, type1, type2, type3, type4, ptr)					(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4))))
-#define SML_GET_OBJECT_5(type0, type1, type2, type3, type4, type5, ptr)				(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4)) + FIELD_OFFSET(struct type4, SML_INTERFACE(type5))))
-#define SML_GET_OBJECT_6(type0, type1, type2, type3, type4, type5, type6, ptr)		(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4)) + FIELD_OFFSET(struct type4, SML_INTERFACE(type5))+ FIELD_OFFSET(struct type5, SML_INTERFACE(type6))))
+#define SML_GET_OBJECT_2(type0, type1, ptr)											(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1))))
+#define SML_GET_OBJECT_3(type0, type1, type2, ptr)									(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2))))
+#define SML_GET_OBJECT_4(type0, type1, type2, type3, ptr)							(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3))))
+#define SML_GET_OBJECT_5(type0, type1, type2, type3, type4, ptr)					(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4))))
+#define SML_GET_OBJECT_6(type0, type1, type2, type3, type4, type5, ptr)				(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4)) + FIELD_OFFSET(struct type4, SML_INTERFACE(type5))))
+#define SML_GET_OBJECT_7(type0, type1, type2, type3, type4, type5, type6, ptr)		(struct type0 *)((CHAR*)(ptr) - (FIELD_OFFSET(struct type0, SML_INTERFACE(type1)) + FIELD_OFFSET(struct type1, SML_INTERFACE(type2)) + FIELD_OFFSET(struct type2, SML_INTERFACE(type3)) + FIELD_OFFSET(struct type3, SML_INTERFACE(type4)) + FIELD_OFFSET(struct type4, SML_INTERFACE(type5))+ FIELD_OFFSET(struct type5, SML_INTERFACE(type6))))
 //add more if needed
 
 #define  SML_ALLOC_OBJ(obj_type)													(struct obj_type *)malloc(sizeof(struct obj_type))

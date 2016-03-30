@@ -10,32 +10,32 @@ static SML_FUNC_TABLE_DEFINE(MyNameObj, IMyProp) =
 {
 	//struct IMyProp
 	//{
-	SML_OBJ_FUNC(MyNameObj, SetName),//	HRESULT(*SetName)(struct IMyProp *_this, LPCTSTR name);
+	SML_OBJ_FUNC_2(MyNameObj, IMyProp, SetName),//	HRESULT(*SetName)(struct IMyProp *_this, LPCTSTR name);
 
 	{
-		SML_OBJ_FUNC(MyNameObj, CreateMember),//	//	HRESULT(*CreateMember)(struct IMyObject * _this);
-		SML_OBJ_FUNC(MyNameObj, DestroyMember),//	//	HRESULT(*DestroyMember)(struct IMyObject * _this);
-		SML_OBJ_FUNC(MyNameObj, AddRef),//	//	LONG(*AddRef)(struct IMyObject * _this);
-		SML_OBJ_FUNC(MyNameObj, Release),//	//	LONG(*Release)(struct IMyObject * _this);
-		SML_OBJ_FUNC(MyNameObj, QueryInterface)
+		SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, CreateMember),//	//	HRESULT(*CreateMember)(struct IMyObject * _this);
+		SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, DestroyMember),//	//	HRESULT(*DestroyMember)(struct IMyObject * _this);
+		SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, AddRef),//	//	LONG(*AddRef)(struct IMyObject * _this);
+		SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, Release),//	//	LONG(*Release)(struct IMyObject * _this);
+		SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, QueryInterface)
 	},
 
-	SML_OBJ_FUNC(MyNameObj, GetName),//	LPCTSTR(*GetName)(struct IMyProp *_this);
+	SML_OBJ_FUNC_2(MyNameObj, IMyProp, GetName),//	LPCTSTR(*GetName)(struct IMyProp *_this);
 };
 
 static SML_FUNC_TABLE_DEFINE(MyNameObj, IMyMethod) = 
 {
-	SML_OBJ_FUNC(MyNameObj, SayHi),
+	SML_OBJ_FUNC_2(MyNameObj, IMyMethod, SayHi),
 
 	{
-		SML_OBJ_FUNC_2(MyNameObj, IMyMethod, CreateMember),
-		SML_OBJ_FUNC_2(MyNameObj, IMyMethod, DestroyMember),
-		SML_OBJ_FUNC_2(MyNameObj, IMyMethod, AddRef),
-		SML_OBJ_FUNC_2(MyNameObj, IMyMethod, Release),
-		SML_OBJ_FUNC_2(MyNameObj, IMyMethod, QueryInterface)
+		SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, CreateMember),
+		SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, DestroyMember),
+		SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, AddRef),
+		SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, Release),
+		SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, QueryInterface)
 	},
 
-	SML_OBJ_FUNC(MyNameObj, SayBye)
+	SML_OBJ_FUNC_2(MyNameObj, IMyMethod, SayBye)
 };
 
 INT SML_OBJ_FUNC(MyNameObj, SizeOf)()
@@ -111,27 +111,27 @@ HRESULT SML_OBJ_FUNC(MyNameObj, InitObj)(struct MyNameObj * pObj, enum SML_ALLOC
 //{
 //	HRESULT(*SetName)(struct IMyProp *_this, LPCTSTR name);
 //operation
-HRESULT SML_OBJ_FUNC(MyNameObj, SetName)(struct IMyProp * _this, LPCTSTR name)
+HRESULT SML_OBJ_FUNC_2(MyNameObj, IMyProp, SetName)(struct IMyProp * _this, LPCTSTR name)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_1(MyNameObj, IMyProp, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, _this);
 	_tcscpy_s(pObj->m_name, pObj->m_bufferSize, name);
 	return S_OK;
 }
 
 //	LPCTSTR(*GetName)(struct IMyProp *_this);
 //operation
-LPCTSTR SML_OBJ_FUNC(MyNameObj, GetName)(struct IMyProp *_this)
+LPCTSTR SML_OBJ_FUNC_2(MyNameObj, IMyProp, GetName)(struct IMyProp *_this)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_1(MyNameObj, IMyProp, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, _this);
 	return pObj->m_name;
 }
 //	struct IMyObject m_IObject; //deliberately put at end
 
 //	//	HRESULT(*CreateMember)(struct IMyObject * _this);
 //create resources
-HRESULT SML_OBJ_FUNC(MyNameObj, CreateMember)(struct IMyObject * _this)
+HRESULT SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, CreateMember)(struct IMyObject * _this)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, IMyObject, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_3(MyNameObj, IMyProp, IMyObject, _this);
 	pObj->m_name = (LPTSTR)VirtualAlloc(
 		NULL,//_In_opt_ LPVOID lpAddress,
 		pObj->m_bufferSize * sizeof(TCHAR),//_In_     SIZE_T dwSize,
@@ -143,25 +143,25 @@ HRESULT SML_OBJ_FUNC(MyNameObj, CreateMember)(struct IMyObject * _this)
 }
 //	//	HRESULT(*DestroyMember)(struct IMyObject * _this);
 //destroy resources
-HRESULT SML_OBJ_FUNC(MyNameObj, DestroyMember)(struct IMyObject * _this)
+HRESULT SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, DestroyMember)(struct IMyObject * _this)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, IMyObject, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_3(MyNameObj, IMyProp, IMyObject, _this);
 	VirtualFree(pObj->m_name, 0, MEM_RELEASE);
 	pObj->m_name = NULL;
 	return S_OK;
 }
 //	//	LONG(*AddRef)(struct IMyObject * _this)
 //add reference count
-LONG SML_OBJ_FUNC(MyNameObj, AddRef)(struct IMyObject * _this)
+LONG SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, AddRef)(struct IMyObject * _this)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, IMyObject, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_3(MyNameObj, IMyProp, IMyObject, _this);
 	return InterlockedIncrement(&pObj->m_refCount);
 }
 //	//	LONG(*Release)(struct IMyObject * _this);
 //decrement reference count, destroy resources (again) by calling DestroyMember(...), and free object itself
-LONG SML_OBJ_FUNC(MyNameObj, Release)(struct IMyObject * _this)
+LONG SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, Release)(struct IMyObject * _this)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, IMyObject, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_3(MyNameObj, IMyProp, IMyObject, _this);
 	LONG refCount = InterlockedDecrement(&pObj->m_refCount);
 	if (0 == refCount)
 	{
@@ -192,9 +192,9 @@ LONG SML_OBJ_FUNC(MyNameObj, Release)(struct IMyObject * _this)
 
 //QueryInterface
 //reference count is incremented on successful query
-void * SML_OBJ_FUNC(MyNameObj, QueryInterface)(struct IMyObject * _this, LPCSTR name)
+void * SML_OBJ_FUNC_3(MyNameObj, IMyProp, IMyObject, QueryInterface)(struct IMyObject * _this, LPCSTR name)
 {
-	struct MyNameObj * pObj = SML_GET_OBJECT_2(MyNameObj, IMyProp, IMyObject, _this);
+	struct MyNameObj * pObj = SML_GET_OBJECT_3(MyNameObj, IMyProp, IMyObject, _this);
 	void * pinterface = NULL;
 	if (0 == strcmp(name, SML_NAME_OF(IMyObject)))
 	{
@@ -219,44 +219,44 @@ void * SML_OBJ_FUNC(MyNameObj, QueryInterface)(struct IMyObject * _this, LPCSTR 
 }
 
 
-HRESULT SML_OBJ_FUNC_2(MyNameObj, IMyMethod, CreateMember)(struct IMyObject * _this)
+HRESULT SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, CreateMember)(struct IMyObject * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, IMyObject, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_3(MyNameObj, IMyMethod, IMyObject, _this);
 	return SML_CALL_METHOD(CreateMember, &pOj->SML_INTERFACE(IMyProp).SML_INTERFACE(IMyObject));
 }
-HRESULT SML_OBJ_FUNC_2(MyNameObj, IMyMethod, DestroyMember)(struct IMyObject * _this)
+HRESULT SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, DestroyMember)(struct IMyObject * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, IMyObject, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_3(MyNameObj, IMyMethod, IMyObject, _this);
 	return SML_CALL_METHOD(DestroyMember, &pOj->SML_INTERFACE(IMyProp).SML_INTERFACE(IMyObject));
 }
-LONG SML_OBJ_FUNC_2(MyNameObj, IMyMethod, AddRef)(struct IMyObject * _this)
+LONG SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, AddRef)(struct IMyObject * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, IMyObject, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_3(MyNameObj, IMyMethod, IMyObject, _this);
 	return SML_CALL_METHOD(AddRef, &pOj->SML_INTERFACE(IMyProp).SML_INTERFACE(IMyObject));
 }
-LONG SML_OBJ_FUNC_2(MyNameObj, IMyMethod, Release)(struct IMyObject * _this)
+LONG SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, Release)(struct IMyObject * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, IMyObject, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_3(MyNameObj, IMyMethod, IMyObject, _this);
 	return SML_CALL_METHOD(Release, &pOj->SML_INTERFACE(IMyProp).SML_INTERFACE(IMyObject));
 }
 
-void * SML_OBJ_FUNC_2(MyNameObj, IMyMethod, QueryInterface)(struct IMyObject * _this, LPCSTR name)
+void * SML_OBJ_FUNC_3(MyNameObj, IMyMethod, IMyObject, QueryInterface)(struct IMyObject * _this, LPCSTR name)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, IMyObject, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_3(MyNameObj, IMyMethod, IMyObject, _this);
 	return SML_CALL_METHOD(QueryInterface, &pOj->SML_INTERFACE(IMyProp).SML_INTERFACE(IMyObject), name);
 }
 
-HRESULT SML_OBJ_FUNC(MyNameObj, SayHi)(struct IMyMethod * _this)
+HRESULT SML_OBJ_FUNC_2(MyNameObj, IMyMethod, SayHi)(struct IMyMethod * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_1(MyNameObj, IMyMethod, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, _this);
 	_ftprintf_s(stdout, L"Hello, %s" L"\r\n", pOj->m_name);
 	return S_OK;
 }
 
 
-HRESULT SML_OBJ_FUNC(MyNameObj, SayBye)(struct IMyMethod * _this)
+HRESULT SML_OBJ_FUNC_2(MyNameObj, IMyMethod, SayBye)(struct IMyMethod * _this)
 {
-	struct MyNameObj * pOj = SML_GET_OBJECT_1(MyNameObj, IMyMethod, _this);
+	struct MyNameObj * pOj = SML_GET_OBJECT_2(MyNameObj, IMyMethod, _this);
 	_ftprintf_s(stdout, L"Byte bye, %s" L"\r\n", pOj->m_name);
 	return S_OK;
 }
