@@ -77,16 +77,16 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv)
 
 	}
 
-	SML_RESOURCE_ADD(SML_RCM_OBJECT, pIMyObject, NULL);
+	SML_RESOURCE_ADD_1(pIMyObject->Release, pIMyObject);
 
 
 
 	struct IMyProp * pIMyProp = SML_CALL_METHOD(QueryInterface, pIMyObject, SML_NAME_OF(IMyProp)); //QueryInterface, ref count ++
-	SML_RESOURCE_ADD(SML_RCM_OBJECT, &pIMyProp->SML_INTERFACE(SML_IObject), NULL);
+	SML_RESOURCE_ADD_1(pIMyProp->SML_INTERFACE(SML_IObject).Release, &pIMyProp->SML_INTERFACE(SML_IObject));
 
 	{
 		struct SML_IObject * pIMyObject1 = SML_CALL_METHOD(QueryInterface, pIMyObject, SML_NAME_OF(SML_IObject));//QueryInterface, ref count ++
-		SML_RESOURCE_ADD(SML_RCM_OBJECT, pIMyObject1, NULL);
+		SML_RESOURCE_ADD_1(pIMyObject1->Release, pIMyObject1);
 
 		//SML_CALL_METHOD(Release, pIMyObject); //ref count --
 		//pIMyObject = NULL;
@@ -105,22 +105,22 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv)
 
 	{
 		struct IMyMethod * pIMyMethod = SML_CALL_METHOD(QueryInterface, &pIMyProp->SML_INTERFACE(SML_IObject), SML_NAME_OF(IMyMethod));
-		SML_RESOURCE_ADD(SML_RCM_OBJECT, &pIMyMethod->SML_INTERFACE(SML_IObject), NULL);
+		SML_RESOURCE_ADD_1(pIMyMethod->SML_INTERFACE(SML_IObject).Release, &pIMyMethod->SML_INTERFACE(SML_IObject));
 
 		SML_CALL_METHOD(SayHi, pIMyMethod);
 		SML_CALL_METHOD(SayBye, pIMyMethod);
 
 		{
 			struct SML_IObject * ptemp1 = SML_CALL_METHOD(QueryInterface, &pIMyMethod->SML_INTERFACE(SML_IObject), SML_NAME_OF(SML_IObject));
-			SML_RESOURCE_ADD(SML_RCM_OBJECT, ptemp1, NULL);
+			SML_RESOURCE_ADD_1(ptemp1->Release, ptemp1);
 			//SML_CALL_METHOD(Release, ptemp1);
 
 			struct IMyProp * ptemp2 = SML_CALL_METHOD(QueryInterface, &pIMyMethod->SML_INTERFACE(SML_IObject), SML_NAME_OF(IMyProp));
-			SML_RESOURCE_ADD(SML_RCM_OBJECT, &ptemp2->SML_INTERFACE(SML_IObject), NULL);
+			SML_RESOURCE_ADD_1(ptemp2->SML_INTERFACE(SML_IObject).Release, &ptemp2->SML_INTERFACE(SML_IObject));
 			//SML_CALL_METHOD(Release, &ptemp2->SML_INTERFACE(SML_IObject));
 
 			struct IMyMethod * ptemp3 = SML_CALL_METHOD(QueryInterface, &pIMyMethod->SML_INTERFACE(SML_IObject), SML_NAME_OF(IMyMethod));
-			SML_RESOURCE_ADD(SML_RCM_OBJECT, &ptemp3->SML_INTERFACE(SML_IObject), NULL);
+			SML_RESOURCE_ADD_1(ptemp3->SML_INTERFACE(SML_IObject).Release, &ptemp3->SML_INTERFACE(SML_IObject));
 			//SML_CALL_METHOD(Release, &ptemp3->SML_INTERFACE(SML_IObject));
 		}
 
@@ -152,13 +152,13 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 	for (int ii = 0; ii < 16; ++ ii)
 	{
 		//SML_OBJ_FUNC(SML_ResourceList, Add)(&resList, SML_RCM_WINAPI_FUNC, (void*)(ii), (void*)(some_cleanup_func));
-		SML_RESOURCE_ADD(SML_RCM_FUNC_STDCALL, (void*)(ii), (void*)(some_cleanup_func));
+		SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, (void*)(ii));
 	}
 
 
 	//////////////////////////////////////////////////////////////////////////
 	CoInitializeEx(NULL, COINITBASE_MULTITHREADED);
-	SML_RESOURCE_ADD(SML_RCM_FUNC_NO_PARAM, NULL, CoUninitialize);
+	SML_RESOURCE_ADD_0(CoUninitialize);
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 		);
 	if (fd)
 	{
-		SML_RESOURCE_ADD(SML_RCM_FUNC, fd, fclose);
+		SML_RESOURCE_ADD_1(fclose, fd);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -185,27 +185,27 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 		);
 	if (INVALID_HANDLE_VALUE != hFile)
 	{
-		SML_RESOURCE_ADD(SML_RCM_FUNC_STDCALL, hFile, CloseHandle);
+		SML_RESOURCE_ADD_STDCALL_1(CloseHandle, hFile);
 	}
 
 
 	//////////////////////////////////////////////////////////////////////////
 	WSADATA wSAData = { 0 };
 	WSAStartup(MAKEWORD(2, 2), &wSAData);
-	SML_RESOURCE_ADD(SML_RCM_FUNC_NO_PARAM, NULL, WSACleanup);
+	SML_RESOURCE_ADD_0(WSACleanup);
 
 
 	//////////////////////////////////////////////////////////////////////////
 	struct  SML_IObject * pIMyObject = NULL;
 	pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
-	SML_RESOURCE_ADD(SML_RCM_OBJECT, pIMyObject, NULL);
+	SML_RESOURCE_ADD_1(pIMyObject->Release, pIMyObject);
 
 	//////////////////////////////////////////////////////////////////////////
 	void * mem1 = HeapAlloc(GetProcessHeap(), 0, 100);
-	SML_RESOURCE_ADD(SML_RCM_HEAP_FREE, mem1, NULL);
+	SML_RESOURCE_ADD_STDCALL_3(HeapFree, GetProcessHeap(), 0, mem1);
 
 	void * mem2 = VirtualAlloc(NULL, 200, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-	SML_RESOURCE_ADD(SML_RCM_VIRTUAL_FREE, mem2, NULL);
+	SML_RESOURCE_ADD_STDCALL_3(VirtualFree, mem2, 0, MEM_RELEASE);
 	
 	//SML_OBJ_FUNC(SML_ResourceList, Cleanup)(&resList);
 	SML_RESOURCE_CLEANUP;
