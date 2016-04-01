@@ -12,6 +12,7 @@
 
 int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
+int _tmain_case_001_res_mgr_again(int argc, TCHAR ** argv);
 int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv);
 
 int _tmain(INT argc, TCHAR ** argv)
@@ -26,6 +27,7 @@ int _tmain(INT argc, TCHAR ** argv)
 	break;
 	case 1:
 	{
+		_tmain_case_001_res_mgr_again(argc, argv);
 		_tmain_case_001_resoure_mgr(argc, argv);
 	}
 	break;
@@ -152,7 +154,7 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 	for (int ii = 0; ii < 16; ++ ii)
 	{
 		//SML_OBJ_FUNC(SML_ResourceList, Add)(&resList, SML_RCM_WINAPI_FUNC, (void*)(ii), (void*)(some_cleanup_func));
-		SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, (void*)(ii));
+		SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, ii);
 	}
 
 
@@ -298,5 +300,87 @@ int _tmain_case_000_iinc(INT argc, TCHAR ** argv)
 
 	SML_CALL_METHOD(Release, &pIMyProp->SML_INTERFACE(SML_IObject)); //ref count --, zero reached , destroy resources (again) by calling DestroyMember(...) and free object itself
 
+	return 0;
+}
+
+
+
+static void Cleanup_0()
+{
+	_ftprintf_s(stdout, TEXT("%s  ") TEXT("\r\n"), TEXT(__FUNCTION__));
+}
+
+static void Cleanup_1(void * p1)
+{
+	_ftprintf_s(stdout, TEXT("%s %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1);
+}
+static void Cleanup_2(void * p1, void * p2)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2);
+}
+static void Cleanup_3(void * p1, void * p2, void * p3)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3);
+}
+static void Cleanup_4(void * p1, void * p2, void * p3, void * p4)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4);
+}
+static void Cleanup_5(void * p1, void * p2, void * p3, void * p4, void * p5)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4, p5);
+}
+static void Cleanup_6(void * p1, void * p2, void * p3, void * p4, void * p5, void * p6)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4, p5, p6);
+}
+
+
+static void WINAPI CleanupStdcall_1(void * p1)
+{
+	_ftprintf_s(stdout, TEXT("%s %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1);
+}
+static void WINAPI CleanupStdcall_2(void * p1, void * p2)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2);
+}
+static void WINAPI CleanupStdcall_3(void * p1, void * p2, void * p3)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3);
+}
+static void WINAPI CleanupStdcall_4(void * p1, void * p2, void * p3, void * p4)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4);
+}
+static void WINAPI CleanupStdcall_5(void * p1, void * p2, void * p3, void * p4, void * p5)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4, p5);
+}
+static void WINAPI CleanupStdcall_6(void * p1, void * p2, void * p3, void * p4, void * p5, void * p6)
+{
+	_ftprintf_s(stdout, TEXT("%s %p %p %p %p %p %p ") TEXT("\r\n"), TEXT(__FUNCTION__), p1, p2, p3, p4, p5, p6);
+}
+
+int _tmain_case_001_res_mgr_again(int argc, TCHAR ** argv)
+{
+	SML_RESOURCE_INIT;
+
+	SML_RESOURCE_ADD_0(Cleanup_0);
+	SML_RESOURCE_ADD_1(Cleanup_1, 1);
+	SML_RESOURCE_ADD_2(Cleanup_2, 1, 2);
+	SML_RESOURCE_ADD_3(Cleanup_3, 1, 2, 3);
+	SML_RESOURCE_ADD_4(Cleanup_4, 1, 2, 3, 4);
+	SML_RESOURCE_ADD_5(Cleanup_5, 1, 2, 3, 4, 5);
+	SML_RESOURCE_ADD_6(Cleanup_6, 1, 2, 3, 4, 5, 6);
+
+
+	SML_RESOURCE_ADD_STDCALL_1(CleanupStdcall_1, 1);
+	SML_RESOURCE_ADD_STDCALL_2(CleanupStdcall_2, 1, 2);
+	SML_RESOURCE_ADD_STDCALL_3(CleanupStdcall_3, 1, 2, 3);
+	SML_RESOURCE_ADD_STDCALL_4(CleanupStdcall_4, 1, 2, 3, 4);
+	SML_RESOURCE_ADD_STDCALL_5(CleanupStdcall_5, 1, 2, 3, 4, 5);
+	SML_RESOURCE_ADD_STDCALL_6(CleanupStdcall_6, 1, 2, 3, 4, 5, 6);
+
+	SML_RESOURCE_CLEANUP;
 	return 0;
 }
