@@ -24,11 +24,11 @@ struct IMyMethod
 };
 
 
-INT SML_OBJ_FUNC(MyNameObj, SizeOf)();
-struct SML_IObject * SML_OBJ_FUNC(MyNameObj, CreateInstanceStack_SAM_AUTO)(VOID * addr, INT size, INT bufferSize);
+INT SML_OBJ_FUNC_1(MyNameObj, SizeOf)();
+struct SML_IObject * SML_OBJ_FUNC_1(MyNameObj, CreateInstanceStack_SAM_AUTO)(VOID * addr, INT size, INT bufferSize);
 
-struct SML_IObject * SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_MALLOC)(INT bufferSize);
-struct SML_IObject * SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(INT bufferSize);
-struct SML_IObject * SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(INT bufferSize);
-struct SML_IObject * SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM__MALLOCA)(INT bufferSize);
+struct SML_IObject * SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_MALLOC)(INT bufferSize);
+struct SML_IObject * SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(INT bufferSize);
+struct SML_IObject * SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(INT bufferSize);
+struct SML_IObject * SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM__MALLOCA)(INT bufferSize);
 

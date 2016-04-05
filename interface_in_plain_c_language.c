@@ -51,29 +51,29 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv)
 	{
 	case SAM_AUTO:
 	{
-		INT size = SML_OBJ_FUNC(MyNameObj, SizeOf)();
+		INT size = SML_OBJ_FUNC_1(MyNameObj, SizeOf)();
 		VOID * addr = _alloca(size);
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstanceStack_SAM_AUTO)(addr, size, 1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstanceStack_SAM_AUTO)(addr, size, 1024);
 	}
 	break;
 	case SAM_MALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
 	}
 	break;
 	case SAM_HEAP_ALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(1024);
 	}
 	break;
 	case SAM_VIRTUAL_ALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(1024);
 	}
 	break;
 	case SAM__MALLOCA:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM__MALLOCA)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM__MALLOCA)(1024);
 	}
 	break;
 
@@ -148,12 +148,12 @@ static void WINAPI some_cleanup_func(int ii)
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 {
 	//struct SML_ResourceList resList; 
-	//SML_OBJ_FUNC(SML_ResourceList, Init)(&resList);
+	//SML_OBJ_FUNC_1(SML_ResourceList, Init)(&resList);
 	SML_RESOURCE_INIT;
 
 	for (int ii = 0; ii < 16; ++ ii)
 	{
-		//SML_OBJ_FUNC(SML_ResourceList, Add)(&resList, SML_RCM_WINAPI_FUNC, (void*)(ii), (void*)(some_cleanup_func));
+		//SML_OBJ_FUNC_1(SML_ResourceList, Add)(&resList, SML_RCM_WINAPI_FUNC, (void*)(ii), (void*)(some_cleanup_func));
 		SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, ii);
 	}
 
@@ -199,7 +199,7 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 
 	//////////////////////////////////////////////////////////////////////////
 	struct  SML_IObject * pIMyObject = NULL;
-	pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
+	pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
 	SML_RESOURCE_ADD_1(pIMyObject->Release, pIMyObject);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -209,7 +209,7 @@ int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)
 	void * mem2 = VirtualAlloc(NULL, 200, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 	SML_RESOURCE_ADD_STDCALL_3(VirtualFree, mem2, 0, MEM_RELEASE);
 	
-	//SML_OBJ_FUNC(SML_ResourceList, Cleanup)(&resList);
+	//SML_OBJ_FUNC_1(SML_ResourceList, Cleanup)(&resList);
 	SML_RESOURCE_CLEANUP;
 
 	return 0;
@@ -225,29 +225,29 @@ int _tmain_case_000_iinc(INT argc, TCHAR ** argv)
 	{
 	case SAM_AUTO:
 	{
-		INT size = SML_OBJ_FUNC(MyNameObj, SizeOf)();
+		INT size = SML_OBJ_FUNC_1(MyNameObj, SizeOf)();
 		VOID * addr = _alloca(size);
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstanceStack_SAM_AUTO)(addr, size, 1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstanceStack_SAM_AUTO)(addr, size, 1024);
 	}
 	break;
 	case SAM_MALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_MALLOC)(1024);
 	}
 	break;
 	case SAM_HEAP_ALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_HEAP_ALLOC)(1024);
 	}
 	break;
 	case SAM_VIRTUAL_ALLOC:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM_VIRTUAL_ALLOC)(1024);
 	}
 	break;
 	case SAM__MALLOCA:
 	{
-		pIMyObject = SML_OBJ_FUNC(MyNameObj, CreateInstance_SAM__MALLOCA)(1024);
+		pIMyObject = SML_OBJ_FUNC_1(MyNameObj, CreateInstance_SAM__MALLOCA)(1024);
 	}
 	break;
 	

@@ -3,7 +3,7 @@
 
 #include "sml_resource_manager.h"
 
-void SML_OBJ_FUNC(SML_Resource, Cleanup)(struct SML_Resource * res)
+void SML_OBJ_FUNC_1(SML_Resource, Cleanup)(struct SML_Resource * res)
 {
 	switch (res->m_rcm)
 	{
@@ -111,7 +111,7 @@ void SML_OBJ_FUNC(SML_Resource, Cleanup)(struct SML_Resource * res)
 
 
 //void Init();
-void SML_OBJ_FUNC(SML_ResourceList, Init)(struct SML_ResourceList * resList)
+void SML_OBJ_FUNC_1(SML_ResourceList, Init)(struct SML_ResourceList * resList)
 {
 	ZeroMemory(resList, sizeof(struct SML_ResourceList));
 	resList->m_list = resList->m_stack;
@@ -119,7 +119,7 @@ void SML_OBJ_FUNC(SML_ResourceList, Init)(struct SML_ResourceList * resList)
 	resList->m_capacity = SML_INITIAL_RESOURCE_COUNT;
 }
 //void Add();
-void SML_OBJ_FUNC(SML_ResourceList, Add)(
+void SML_OBJ_FUNC_1(SML_ResourceList, Add)(
 	struct SML_ResourceList * resList,
 	enum  SML_RESOURCE_CLEANUP_METHOD rcm,
 	void * func,
@@ -173,11 +173,11 @@ void SML_OBJ_FUNC(SML_ResourceList, Add)(
 	++resList->m_count;
 }
 //void Cleanup()
-void SML_OBJ_FUNC(SML_ResourceList, Cleanup)(struct SML_ResourceList * resList)
+void SML_OBJ_FUNC_1(SML_ResourceList, Cleanup)(struct SML_ResourceList * resList)
 {
 	for (LONG ii = resList->m_count - 1; ii >= 0; --ii)
 	{
-		SML_OBJ_FUNC(SML_Resource, Cleanup)(resList->m_list + ii);
+		SML_OBJ_FUNC_1(SML_Resource, Cleanup)(resList->m_list + ii);
 	}
 
 	if (resList->m_list != resList->m_stack)
