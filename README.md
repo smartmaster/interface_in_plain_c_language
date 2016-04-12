@@ -4,4 +4,3 @@ Sample to demo interface in plain C language
 
 Sample to demo RAII in plain C language
 
-

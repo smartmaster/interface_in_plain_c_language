@@ -8,7 +8,8 @@
 
 #include "my_interface.h"
 #include "sml_resource_manager.h"
-
+#include "test_res_mgmt_macro.h"
+#include "test_SML_RCM_FUNC_PARAMS.h"
 
 int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
@@ -27,6 +28,9 @@ int _tmain(INT argc, TCHAR ** argv)
 	break;
 	case 1:
 	{
+		SML_OBJ_FUNC_1(MySomeParams, Test)();
+		SML_OBJ_FUNC_1(MyResObj, Test)();
+		SML_OBJ_FUNC_1(MyResObj, Test2)();
 		_tmain_case_001_res_mgr_again(argc, argv);
 		_tmain_case_001_resoure_mgr(argc, argv);
 	}

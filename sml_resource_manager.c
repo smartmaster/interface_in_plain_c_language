@@ -101,6 +101,19 @@ void SML_OBJ_FUNC_1(SML_Resource, Cleanup)(struct SML_Resource * res)
 		func(res->m_resource, res->m_resource2, res->m_resource3, res->m_resource4, res->m_resource5, res->m_resource6);
 	}
 	break;
+
+	case SML_RCM_FUNC_PARAMS:
+	{
+		SML_pfnCleanup_1 func = (SML_pfnCleanup_1)(res->m_func);
+		func(res->m_resource);
+		if (res->m_resource2)
+		{
+			SML_pfnCleanup_1 destroyParams = (SML_pfnCleanup_1)(res->m_resource2);
+			destroyParams(res->m_resource);
+		}
+		SML_FREE_PARAMS(res->m_resource);
+	}
+	break;
 	
 	}
 

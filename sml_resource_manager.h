@@ -3,6 +3,9 @@
 #include <tchar.h>
 #include <windows.h>
 
+#include <stdlib.h>
+#include <malloc.h>
+
 #include "sml_interface_common.h"
 
 typedef void(*SML_pfnCleanup_0)();
@@ -45,7 +48,11 @@ enum SML_RESOURCE_CLEANUP_METHOD
 	SML_RCM_FUNC_STDCALL_4,
 	SML_RCM_FUNC_STDCALL_5,
 	SML_RCM_FUNC_STDCALL_6,
+	SML_RCM_FUNC_PARAMS,
 };
+
+#define SML_ALLOC_PARAMS(size)	_malloca(size)
+#define SML_FREE_PARAMS(ptr)	_freea(ptr)
 
 struct SML_Resource
 {
@@ -134,6 +141,9 @@ SML_OBJ_FUNC_1(SML_ResourceList, Add)(&sml_resourcelist, SML_RCM_FUNC_STDCALL_5,
 
 #define  SML_RESOURCE_ADD_STDCALL_6(func, resource, resource2, resource3, resource4, resource5, resource6) \
 SML_OBJ_FUNC_1(SML_ResourceList, Add)(&sml_resourcelist, SML_RCM_FUNC_STDCALL_6, (void*)(func), (void*)(resource), (void*)(resource2), (void*)(resource3), (void*)(resource4), (void*)(resource5), (void*)(resource6), __FILE__, __FUNCTION__, __LINE__)
+
+#define  SML_RESOURCE_ADD_PARAMS(func, resource, resource2) \
+SML_OBJ_FUNC_1(SML_ResourceList, Add)(&sml_resourcelist, SML_RCM_FUNC_PARAMS, (void*)(func), (void*)(resource), (void*)(resource2), SML_NULL_3, SML_NULL_4, SML_NULL_5, SML_NULL_6, __FILE__, __FUNCTION__, __LINE__)
 
 
 #define SML_RESOURCE_CLEANUP \
