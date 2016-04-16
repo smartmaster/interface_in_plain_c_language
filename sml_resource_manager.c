@@ -132,7 +132,7 @@ void SML_OBJ_FUNC_1(SML_ResourceList, Init)(struct SML_ResourceList * resList)
 	resList->m_capacity = SML_INITIAL_RESOURCE_COUNT;
 }
 //void Add();
-void SML_OBJ_FUNC_1(SML_ResourceList, Add)(
+int SML_OBJ_FUNC_1(SML_ResourceList, Add)(
 	struct SML_ResourceList * resList,
 	enum  SML_RESOURCE_CLEANUP_METHOD rcm,
 	void * func,
@@ -183,8 +183,18 @@ void SML_OBJ_FUNC_1(SML_ResourceList, Add)(
 	resList->m_list[resList->m_count].m_atFunc = atFunc;
 	resList->m_list[resList->m_count].m_atLine = atLine;
 
-	++resList->m_count;
+	return resList->m_count++;
 }
+
+
+void SML_OBJ_FUNC_1(SML_ResourceList, NoCleanup)(
+	struct SML_ResourceList * resList,
+	int index
+	)
+{
+	ZeroMemory(&resList->m_list[index], sizeof(struct SML_Resource));
+}
+
 //void Cleanup()
 void SML_OBJ_FUNC_1(SML_ResourceList, Cleanup)(struct SML_ResourceList * resList)
 {

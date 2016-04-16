@@ -15,6 +15,8 @@ int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
 int _tmain_case_001_res_mgr_again(int argc, TCHAR ** argv);
 int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv);
+int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv);
+
 
 int _tmain(INT argc, TCHAR ** argv)
 {
@@ -28,6 +30,7 @@ int _tmain(INT argc, TCHAR ** argv)
 	break;
 	case 1:
 	{
+		_tmain_test_003_res_no_cleanup(argc, argv);
 		SML_OBJ_FUNC_1(MySomeParams, Test)();
 		SML_OBJ_FUNC_1(MyResObj, Test)();
 		SML_OBJ_FUNC_1(MyResObj, Test2)();
@@ -147,6 +150,20 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv)
 static void WINAPI some_cleanup_func(int ii)
 {
 	_ftprintf_s(stdout, L"cleanup %d" L"\r\n", ii);
+}
+
+int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv)
+{
+	SML_RESOURCE_INIT;
+
+	int index = SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, 100);
+	int index1 = SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, 200);
+
+	SML_RESOURCE_NO_CLEANUP(index);
+
+	SML_RESOURCE_CLEANUP;
+
+	return 0;
 }
 
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv)

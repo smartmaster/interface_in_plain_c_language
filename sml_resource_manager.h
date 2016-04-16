@@ -82,7 +82,7 @@ struct SML_ResourceList
 };
 
 void SML_OBJ_FUNC_1(SML_ResourceList, Init)(struct SML_ResourceList * resList);
-void SML_OBJ_FUNC_1(SML_ResourceList, Add)(
+int SML_OBJ_FUNC_1(SML_ResourceList, Add)(
 	struct SML_ResourceList * resList, 
 	enum  SML_RESOURCE_CLEANUP_METHOD rcm, 
 	void * func,
@@ -95,6 +95,10 @@ void SML_OBJ_FUNC_1(SML_ResourceList, Add)(
 	const CHAR * atFile, 
 	const CHAR * atFunc, 
 	INT atLine);
+void SML_OBJ_FUNC_1(SML_ResourceList, NoCleanup)(
+	struct SML_ResourceList * resList,
+	int index
+	);
 void SML_OBJ_FUNC_1(SML_ResourceList, Cleanup)(struct SML_ResourceList * resList);
 
 #define  SML_RESOURCE_INIT 	\
@@ -144,6 +148,10 @@ SML_OBJ_FUNC_1(SML_ResourceList, Add)(&sml_resourcelist, SML_RCM_FUNC_STDCALL_6,
 
 #define  SML_RESOURCE_ADD_PARAMS(func, resource, resource2) \
 SML_OBJ_FUNC_1(SML_ResourceList, Add)(&sml_resourcelist, SML_RCM_FUNC_PARAMS, (void*)(func), (void*)(resource), (void*)(resource2), SML_NULL_3, SML_NULL_4, SML_NULL_5, SML_NULL_6, __FILE__, __FUNCTION__, __LINE__)
+
+
+#define  SML_RESOURCE_NO_CLEANUP(index) \
+SML_OBJ_FUNC_1(SML_ResourceList, NoCleanup)(&sml_resourcelist, index)
 
 
 #define SML_RESOURCE_CLEANUP \
