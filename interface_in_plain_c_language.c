@@ -159,7 +159,7 @@ int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv)
 	int index = SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, 100);
 	int index1 = SML_RESOURCE_ADD_STDCALL_1(some_cleanup_func, 200);
 
-	SML_RESOURCE_NO_CLEANUP(index);
+	SML_RESOURCE_NO_CLEANUP_ITEM(index);
 
 	SML_RESOURCE_CLEANUP;
 
