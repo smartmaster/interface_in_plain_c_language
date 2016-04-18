@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "my_interface_imp.h"
 
+//add comments in impl file
 
 static SML_FUNC_TABLE_DEFINE(MyNameObj, IMyProp) =
 {

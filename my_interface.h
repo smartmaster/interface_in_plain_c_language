@@ -7,7 +7,7 @@
 #include "sml_interface_common.h"
 #include "sml_iobject.h"
 
-
+//add comments in header file
 
 struct IMyProp
 {

@@ -38,17 +38,6 @@ void SML_OBJ_FUNC_FREE_SPACE(MyResObj)(struct MyResObj * obj)
 }
 
 
-struct MyResObj * SML_OBJ_FUNC_CRAETE_INSTANCE(MyResObj)(int len, BOOL bCreateMember)
-{
-	struct MyResObj * obj = SML_OBJ_FUNC_ALLOC_SPACE(MyResObj)();
-	SML_OBJ_FUNC_INIT_MEMBER(MyResObj)(obj);
-	SML_OBJ_FUNC_ADD_REF(MyResObj)(obj);
-	if (bCreateMember)
-	{
-		SML_OBJ_FUNC_CREATE_MEMBER(MyResObj)(obj, len);
-	}
-	return obj;
-}
 
 //#define SML_OBJ_FUNC_ADD_REF(obj)			SML_OBJ_FUNC_1(obj, AddRef)
 long SML_OBJ_FUNC_ADD_REF(MyResObj)(struct MyResObj * obj)
@@ -72,6 +61,20 @@ long SML_OBJ_FUNC_RELEASE(MyResObj)(struct MyResObj * obj)
 	}
 	return refCount;
 }
+
+
+struct MyResObj * SML_OBJ_FUNC_CRAETE_INSTANCE(MyResObj)(int len, BOOL bCreateMember)
+{
+	struct MyResObj * obj = SML_OBJ_FUNC_ALLOC_SPACE(MyResObj)();
+	SML_OBJ_FUNC_INIT_MEMBER(MyResObj)(obj);
+	SML_OBJ_FUNC_ADD_REF(MyResObj)(obj);
+	if (bCreateMember)
+	{
+		SML_OBJ_FUNC_CREATE_MEMBER(MyResObj)(obj, len);
+	}
+	return obj;
+}
+
 
 
 void SML_OBJ_FUNC_1(MyResObj, Test)()

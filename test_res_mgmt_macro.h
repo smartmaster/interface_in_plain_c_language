@@ -20,15 +20,16 @@ void SML_OBJ_FUNC_DESTROY_MEMBER(MyResObj)(struct MyResObj * obj);
 //#define SML_OBJ_FUNC_FREE_SPACE(obj)		SML_OBJ_FUNC_1(obj, FreeSpace)
 void SML_OBJ_FUNC_FREE_SPACE(MyResObj)(struct MyResObj * obj);
 
-//#define SML_OBJ_FUNC_CRAETE_INSTANCE(obj)	SML_OBJ_FUNC_1(obj, CraeteInstance);
-struct MyResObj * SML_OBJ_FUNC_CRAETE_INSTANCE(MyResObj)(int len, BOOL bCreateMember);
+
 //#define SML_OBJ_FUNC_ADD_REF(obj)			SML_OBJ_FUNC_1(obj, AddRef)
 long SML_OBJ_FUNC_ADD_REF(MyResObj)(struct MyResObj * obj);
-//#define SML_OBJ_FUNC_QUERY_INTERFACE(obj)	SML_OBJ_FUNC_1(obj, QueryInterface)
-void * SML_OBJ_FUNC_QUERY_INTERFACE(MyResObj)(struct MyResObj * obj, const WCHAR * name);
 //#define SML_OBJ_FUNC_RELEASE(obj)			SML_OBJ_FUNC_1(obj, Release)
 long SML_OBJ_FUNC_RELEASE(MyResObj)(struct MyResObj * obj);
+//#define SML_OBJ_FUNC_QUERY_INTERFACE(obj)	SML_OBJ_FUNC_1(obj, QueryInterface)
+void * SML_OBJ_FUNC_QUERY_INTERFACE(MyResObj)(struct MyResObj * obj, const WCHAR * name);
 
+//#define SML_OBJ_FUNC_CRAETE_INSTANCE(obj)	SML_OBJ_FUNC_1(obj, CraeteInstance);
+struct MyResObj * SML_OBJ_FUNC_CRAETE_INSTANCE(MyResObj)(int len, BOOL bCreateMember);
 
 
 void SML_OBJ_FUNC_1(MyResObj, Test)();
