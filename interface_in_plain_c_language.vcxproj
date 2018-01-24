@@ -279,7 +279,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="demo_third.h" />
     <ClInclude Include="my_interface.h" />
     <ClInclude Include="my_interface_imp.h" />
     <ClInclude Include="sml_iobject.h" />
