@@ -11,6 +11,8 @@
 #include "test_res_mgmt_macro.h"
 #include "test_SML_RCM_FUNC_PARAMS.h"
 
+#include "demo_third.h"
+
 int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
 int _tmain_case_001_res_mgr_again(int argc, TCHAR ** argv);
@@ -23,6 +25,13 @@ int _tmain(INT argc, TCHAR ** argv)
 	int testCase = 2;
 	switch (testCase)
 	{
+	case 3:
+	{
+		fun1 f1 = NULL;
+		fun2 f2 = NULL;
+		fun3 f3 = NULL;
+	}
+	break;
 	case 2:
 	{
 		_tmain_case_002_iinc_with_res_mgr(argc, argv);
