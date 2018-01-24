@@ -54,6 +54,9 @@
     <ClInclude Include="sml_iobject.h">
       <Filter>MyCommon</Filter>
     </ClInclude>
+    <ClInclude Include="demo_third.h">
+      <Filter>MySource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.c">

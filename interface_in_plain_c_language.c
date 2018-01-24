@@ -25,13 +25,6 @@ int _tmain(INT argc, TCHAR ** argv)
 	int testCase = 2;
 	switch (testCase)
 	{
-	//case 3:
-	//{
-	//	fun1 f1 = NULL;
-	//	fun2 f2 = NULL;
-	//	fun3 f3 = NULL;
-	//}
-	//break;
 	case 2:
 	{
 		_tmain_case_002_iinc_with_res_mgr(argc, argv);
