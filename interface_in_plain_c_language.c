@@ -11,7 +11,7 @@
 #include "test_res_mgmt_macro.h"
 #include "test_SML_RCM_FUNC_PARAMS.h"
 
-#include "demo_third.h"
+//#include "demo_third.h"
 
 int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
