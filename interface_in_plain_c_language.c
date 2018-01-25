@@ -19,6 +19,7 @@ int _tmain_case_001_res_mgr_again(int argc, TCHAR ** argv);
 int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv);
 int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv);
 
+//add some comments
 
 //my test for git demo
 
