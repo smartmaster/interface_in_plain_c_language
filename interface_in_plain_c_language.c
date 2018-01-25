@@ -20,6 +20,9 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv);
 int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv);
 
 
+//my test for git demo
+
+
 int _tmain(INT argc, TCHAR ** argv)
 {
 	int testCase = 2;
