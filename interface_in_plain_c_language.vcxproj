@@ -288,6 +288,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="test_res_mgmt_macro.h" />
     <ClInclude Include="test_SML_RCM_FUNC_PARAMS.h" />
+    <ClInclude Include="useless.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="interface_in_plain_c_language.c" />
