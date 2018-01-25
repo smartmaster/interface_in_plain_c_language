@@ -11,7 +11,7 @@
 #include "test_res_mgmt_macro.h"
 #include "test_SML_RCM_FUNC_PARAMS.h"
 
-#include "demo_third.h"
+//#include "demo_third.h"
 
 int _tmain_case_000_iinc(INT argc, TCHAR ** argv);
 int _tmain_case_001_resoure_mgr(INT argc, TCHAR ** argv);
@@ -20,6 +20,9 @@ int _tmain_case_002_iinc_with_res_mgr(INT argc, TCHAR ** argv);
 int _tmain_test_003_res_no_cleanup(INT argc, TCHAR ** argv);
 
 //add some comments
+
+//my test for git demo
+
 
 int _tmain(INT argc, TCHAR ** argv)
 {
